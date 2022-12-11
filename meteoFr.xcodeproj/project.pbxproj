@@ -16,6 +16,10 @@
 		4347DCD12945FC88007BC93D /* meteoFrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCD02945FC88007BC93D /* meteoFrUITests.swift */; };
 		4347DCD32945FC88007BC93D /* meteoFrUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCD22945FC88007BC93D /* meteoFrUITestsLaunchTests.swift */; };
 		4347DCE12945FDAB007BC93D /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 4347DCE02945FDAB007BC93D /* Inject */; };
+		436CFA202946056F00DD235A /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436CFA1F2946056F00DD235A /* WeatherInfo.swift */; };
+		436CFA232946067600DD235A /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436CFA222946067600DD235A /* Requester.swift */; };
+		436CFA252946068F00DD235A /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436CFA242946068F00DD235A /* Service.swift */; };
+		436CFA2B29460D0100DD235A /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436CFA2A29460D0100DD235A /* NetworkTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,12 @@
 		4347DCCC2945FC88007BC93D /* meteoFrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = meteoFrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4347DCD02945FC88007BC93D /* meteoFrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meteoFrUITests.swift; sourceTree = "<group>"; };
 		4347DCD22945FC88007BC93D /* meteoFrUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meteoFrUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		436CFA1F2946056F00DD235A /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
+		436CFA222946067600DD235A /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
+		436CFA242946068F00DD235A /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		436CFA2729460B6700DD235A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		436CFA2829460BAD00DD235A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		436CFA2A29460D0100DD235A /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +109,13 @@
 		4347DCAE2945FC86007BC93D /* meteoFr */ = {
 			isa = PBXGroup;
 			children = (
+				436CFA212946065300DD235A /* Network */,
+				436CFA1D2946055C00DD235A /* Data */,
 				436CFA1B2946032600DD235A /* Presentation */,
 				436CFA1A2946030F00DD235A /* Ressources */,
 				436CFA19294602EC00DD235A /* Application */,
 				4347DCBD2945FC87007BC93D /* Info.plist */,
+				436CFA2729460B6700DD235A /* Config.xcconfig */,
 			);
 			path = meteoFr;
 			sourceTree = "<group>";
@@ -110,7 +123,9 @@
 		4347DCC52945FC88007BC93D /* meteoFrTests */ = {
 			isa = PBXGroup;
 			children = (
+				436CFA2829460BAD00DD235A /* Info.plist */,
 				4347DCC62945FC88007BC93D /* meteoFrTests.swift */,
+				436CFA2929460CEB00DD235A /* Network */,
 			);
 			path = meteoFrTests;
 			sourceTree = "<group>";
@@ -156,6 +171,39 @@
 				4347DCB32945FC86007BC93D /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		436CFA1D2946055C00DD235A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				436CFA1E2946056200DD235A /* Model */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		436CFA1E2946056200DD235A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				436CFA1F2946056F00DD235A /* WeatherInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		436CFA212946065300DD235A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				436CFA222946067600DD235A /* Requester.swift */,
+				436CFA242946068F00DD235A /* Service.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		436CFA2929460CEB00DD235A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				436CFA2A29460D0100DD235A /* NetworkTests.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,9 +363,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436CFA202946056F00DD235A /* WeatherInfo.swift in Sources */,
 				4347DCB42945FC86007BC93D /* HomeViewController.swift in Sources */,
 				4347DCB02945FC86007BC93D /* AppDelegate.swift in Sources */,
+				436CFA232946067600DD235A /* Requester.swift in Sources */,
 				4347DCB22945FC86007BC93D /* SceneDelegate.swift in Sources */,
+				436CFA252946068F00DD235A /* Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436CFA2B29460D0100DD235A /* NetworkTests.swift in Sources */,
 				4347DCC72945FC88007BC93D /* meteoFrTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +419,7 @@
 /* Begin XCBuildConfiguration section */
 		4347DCD42945FC88007BC93D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -427,6 +480,7 @@
 		};
 		4347DCD52945FC88007BC93D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -481,6 +535,7 @@
 		};
 		4347DCD72945FC88007BC93D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -509,6 +564,7 @@
 		};
 		4347DCD82945FC88007BC93D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -537,6 +593,7 @@
 		};
 		4347DCDA2945FC88007BC93D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -544,6 +601,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4679JBN3A9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = meteoFrTests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.meteoFrTests;
@@ -557,6 +616,7 @@
 		};
 		4347DCDB2945FC88007BC93D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -564,6 +624,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4679JBN3A9;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = meteoFrTests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.meteoFrTests;
@@ -577,6 +639,7 @@
 		};
 		4347DCDD2945FC88007BC93D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -595,6 +658,7 @@
 		};
 		4347DCDE2945FC88007BC93D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436CFA2729460B6700DD235A /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

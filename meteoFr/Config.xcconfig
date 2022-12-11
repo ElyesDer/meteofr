@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  meteoFr
+//
+//  Created by Elyes Derouich on 11/12/2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_KEY = fbcc2d08e4a21dee9e6c3c7cc5aacb05
