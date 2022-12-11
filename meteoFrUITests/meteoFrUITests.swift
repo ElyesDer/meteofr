@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class meteoFrUITests: XCTestCase {
+final class MeteoFrUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

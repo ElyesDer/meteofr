@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class meteoFrUITestsLaunchTests: XCTestCase {
+final class MeteoFrUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
