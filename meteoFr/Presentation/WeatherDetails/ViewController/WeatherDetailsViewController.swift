@@ -97,21 +97,16 @@ class WeatherDetailViewController: UIViewController {
         switch status {
         case .loading:
             setupLoadingMode()
-            break
         case .idle:
             // dont do anythign
             setupIdleMode()
-            break
-        case .requestError:
-            // show error messsage
-            break
-        case .unreachable:
+        case .error(let message):
             // show error
-            break
+            
+            setupIdleMode()
         case .loaded:
             // clean UI
             setupLoadingMode()
-            break
         }
     }
     
@@ -124,7 +119,7 @@ class WeatherDetailViewController: UIViewController {
         actionButton.anchor(top: nil, leading: stateContainerView.leadingAnchor, bottom: nil, trailing: stateContainerView.trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16))
         NSLayoutConstraint.activate([
             actionButton.centerXAnchor.constraint(equalTo: stateContainerView.centerXAnchor),
-            actionButton.centerYAnchor.constraint(equalTo: stateContainerView.centerYAnchor),
+            actionButton.centerYAnchor.constraint(equalTo: stateContainerView.centerYAnchor)
         ])
     }
     
@@ -133,7 +128,7 @@ class WeatherDetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         actionButton.removeFromSuperview()

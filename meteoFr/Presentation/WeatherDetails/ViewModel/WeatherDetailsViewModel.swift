@@ -10,8 +10,7 @@ import Foundation
 enum ViewStatus {
     case loading
     case idle
-    case requestError
-    case unreachable
+    case error(String)
     case loaded
 }
 
