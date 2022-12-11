@@ -32,9 +32,29 @@ class WeatherDetailViewController: UIViewController {
         progressView.progress = 0.0
         progressView.layer.cornerRadius = 10
         progressView.clipsToBounds = true
+        progressView.trackTintColor = .darkGray
         progressView.layer.sublayers![1].cornerRadius = 10
         progressView.subviews[1].clipsToBounds = true
         return progressView
+    }()
+    
+    lazy var progressLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
+    
+    lazy var progressIndicatorLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.textColor = .white
+        label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
@@ -100,6 +120,14 @@ class WeatherDetailViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] progress in
                 self?.progressBar.setProgress(progress, animated: true)
+                self?.progressIndicatorLabel.text = "\(Int(progress * 100))%"
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$loadingMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
+                self?.progressLabel.text = message
             }
             .store(in: &cancellables)
     }
@@ -113,7 +141,8 @@ class WeatherDetailViewController: UIViewController {
             setupIdleMode()
         case .error(let message):
             // show error
-            
+            let alert = UIAlertController(title: "Error", message: "Error \(message)", preferredStyle: .alert)
+            self.present(alert, animated: true)
             setupIdleMode()
         case .loaded:
             // clean UI
@@ -124,6 +153,10 @@ class WeatherDetailViewController: UIViewController {
     private func setupIdleMode() {
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
+        
+        stateContainerView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
         
         stateContainerView.addSubview(actionButton)
         
@@ -142,15 +175,22 @@ class WeatherDetailViewController: UIViewController {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-        actionButton.removeFromSuperview()
+        stateContainerView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
+        
+        progressBar.addSubview(progressIndicatorLabel)
         stateContainerView.addSubview(progressBar)
         
+        progressIndicatorLabel.anchor(top: progressBar.topAnchor, leading: nil, bottom: progressBar.bottomAnchor, trailing: progressBar.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 2, right: 2))
         progressBar.anchor(top: nil, leading: stateContainerView.leadingAnchor, bottom: stateContainerView.bottomAnchor, trailing: stateContainerView.trailingAnchor,
                            padding: .init(top: 0, left: 16, bottom: 16, right: 16),
                            size: .init(width: 0, height: 20))
         
-        progressBar.setProgress(0.5, animated: true)
         activityIndicator.startAnimating()
+        
+        stateContainerView.addSubview(progressLabel)
+        progressLabel.anchor(top: stateContainerView.topAnchor, leading: stateContainerView.leadingAnchor, bottom: progressBar.topAnchor, trailing: stateContainerView.trailingAnchor, padding: .init(top: 0, left: 8, bottom: 8, right: 8))
     }
 }
 

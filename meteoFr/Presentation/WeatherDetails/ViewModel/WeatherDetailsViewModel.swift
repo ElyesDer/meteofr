@@ -24,6 +24,12 @@ let bordeaux: CountryCoordinates = (lat: 0.0, lon: 0.0)
 
 let globalCountriesToRequest: [CountryCoordinates] = [rennes, paris, nantes, bordeaux, lyon]
 
+let globalWaitMessage: [String] = [
+    "Nous téléchargeons les données…",
+    "C’est presque fini…",
+    "Plus que quelques secondes avant d’avoir le résultat…"
+]
+
 protocol WeatherDetailViewModelProtocol: AnyObject {
     
     var currentStatus: ViewStatus { get }
@@ -45,8 +51,12 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
     @Published
     var progress: Float = 0.0
     
+    @Published
+    var loadingMessage: String? = globalWaitMessage.randomElement()
+    
     private var index: Int = globalCountriesToRequest.count - 1
     private var timer: AnyCancellable?
+    private var labelTimer: AnyCancellable?
     private var cancellable = Set<AnyCancellable>()
     
     let countriesToRequest: [CountryCoordinates] = globalCountriesToRequest
@@ -58,8 +68,10 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
     }
     
     func reset() {
+        currentStatus = .idle
         index = globalCountriesToRequest.count
         timer?.cancel()
+        labelTimer?.cancel()
         timer = nil
     }
     
@@ -82,6 +94,13 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
                 if self.index == 0 {
                     self.reset()
                 }
+            }
+        
+        labelTimer = Timer.publish(every: 6, on: .main, in: .default)
+            .autoconnect()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.loadingMessage = globalWaitMessage.randomElement()
             }
     }
     
