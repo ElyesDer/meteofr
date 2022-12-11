@@ -30,7 +30,9 @@ final class NetworkTests: XCTestCase {
             endURL: .latlong(lat: 0.0, lon: 0.0))
         
         // do
-        _ = try await zut.request(from: endPoint, of: WeatherInfo.self)
+        let data = try await zut.request(from: endPoint, of: WeatherInfo.self)
+        
+        XCTAssertNotNil(data.id)
     }
 
     func testExample() throws {

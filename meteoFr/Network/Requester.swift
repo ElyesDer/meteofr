@@ -18,7 +18,7 @@ class Requester: DataServiceProviderProtocol {
     
     enum ServiceError: Error {
         case urlRequest
-        case statusCode
+        case statusCodeError(Int)
         case responseError
         case unauthorized
         case unhandled
@@ -42,13 +42,11 @@ class Requester: DataServiceProviderProtocol {
             throw ServiceError.responseError
         }
         
-        switch response.statusCode {
-        case 200:
-            return try JSONDecoder().decode(T.self, from: sessionResponse.0)
-        case 401:
-            throw ServiceError.unauthorized
-        default:
-            throw ServiceError.unhandled
+        guard response.statusCode == 200 else {
+            throw ServiceError.statusCodeError(response.statusCode)
         }
+        
+        let decodable = try JSONDecoder().decode(T.self, from: sessionResponse.0)
+        return decodable
     }
 }
