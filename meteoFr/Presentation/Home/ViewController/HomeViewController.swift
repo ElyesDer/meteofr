@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
         // setup action button
         actionButton.addAction(UIAction { _ in
             // perform redirect
-            let viewModel: WeatherDetailsViewModel = WeatherDetailsViewModel()
+            let viewModel: WeatherDetailsViewModel = WeatherDetailsViewModel(weatherStore: WeatherStore())
             let weatherVC = WeatherDetailViewController.instantiate(viewModel: viewModel)
             self.navigationController?.pushViewController(weatherVC, animated: true)
         }, for: .touchUpInside)

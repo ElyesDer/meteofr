@@ -80,8 +80,12 @@ class WeatherDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        viewModel.performRequest()
+        viewModel.startFetchJob()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.reset()
     }
     
     func setupListeners() {
@@ -89,6 +93,13 @@ class WeatherDetailViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] status in
                 self?.setupMode(status: status)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$progress
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] progress in
+                self?.progressBar.setProgress(progress, animated: true)
             }
             .store(in: &cancellables)
     }
