@@ -27,6 +27,5 @@ While `MVC` could have be a simpler solution, Dependencies Injection was the bes
 - [x] iOS Application using Reactive Programming with Combine Framework in a `MVVM` pattern.
 - [x] Network and Datalayer Unit Testing with Test Driven Devlopment.
 - [x] Uses `AutoLayout` Constraint programmatically. 0 Interface Builder (.storyboard / .xib).
-- [x] Display data using modern `UICollectionViewDiffableDataSource` & `UITableViewViewDiffableDataSource`.
 - [x] `SOLID` Principales 
 - [x] Support `Swiftlint`.
