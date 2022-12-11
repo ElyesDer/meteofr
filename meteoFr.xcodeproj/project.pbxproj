@@ -99,11 +99,9 @@
 		4347DCAE2945FC86007BC93D /* meteoFr */ = {
 			isa = PBXGroup;
 			children = (
-				4347DCAF2945FC86007BC93D /* AppDelegate.swift */,
-				4347DCB12945FC86007BC93D /* SceneDelegate.swift */,
-				4347DCB32945FC86007BC93D /* HomeViewController.swift */,
-				4347DCB82945FC87007BC93D /* Assets.xcassets */,
-				4347DCBA2945FC87007BC93D /* LaunchScreen.storyboard */,
+				436CFA1B2946032600DD235A /* Presentation */,
+				436CFA1A2946030F00DD235A /* Ressources */,
+				436CFA19294602EC00DD235A /* Application */,
 				4347DCBD2945FC87007BC93D /* Info.plist */,
 			);
 			path = meteoFr;
@@ -124,6 +122,40 @@
 				4347DCD22945FC88007BC93D /* meteoFrUITestsLaunchTests.swift */,
 			);
 			path = meteoFrUITests;
+			sourceTree = "<group>";
+		};
+		436CFA19294602EC00DD235A /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4347DCAF2945FC86007BC93D /* AppDelegate.swift */,
+				4347DCB12945FC86007BC93D /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		436CFA1A2946030F00DD235A /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				4347DCB82945FC87007BC93D /* Assets.xcassets */,
+				4347DCBA2945FC87007BC93D /* LaunchScreen.storyboard */,
+			);
+			path = Ressources;
+			sourceTree = "<group>";
+		};
+		436CFA1B2946032600DD235A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				436CFA1C2946032C00DD235A /* Home */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		436CFA1C2946032C00DD235A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4347DCB32945FC86007BC93D /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
