@@ -12,15 +12,14 @@ enum ViewStatus {
     case loading
     case idle
     case error(String)
-    case loaded
 }
 
 // Rennes, à 10 secondes Paris, à 20 secondes Nantes, etc pour Bordeaux et Lyon
-let rennes: CountryCoordinates = (lat: 0.0, lon: 0.0)
-let lyon: CountryCoordinates = (lat: 0.0, lon: 0.0)
-let paris: CountryCoordinates = (lat: 0.0, lon: 0.0)
-let nantes: CountryCoordinates = (lat: 0.0, lon: 0.0)
-let bordeaux: CountryCoordinates = (lat: 0.0, lon: 0.0)
+let rennes: CountryCoordinates = (name: "Rennes", lat: 48.1173, lon: 1.6778) // 48.1173° N, 1.6778° W
+let lyon: CountryCoordinates = (name: "Lyon", lat: 45.7640, lon: 4.8357) // 45.7640° N, 4.8357° E
+let paris: CountryCoordinates = (name: "Paris", lat: 48.8566, lon: 2.3522) // 48.8566° N, 2.3522° E
+let nantes: CountryCoordinates = (name: "Nantes", lat: 47.2184, lon: 1.5536) // 47.2184° N, 1.5536° W
+let bordeaux: CountryCoordinates = (name: "Bordeaux", lat: 44.8378, lon: 0.5792) // 44.8378° N, 0.5792° W
 
 let globalCountriesToRequest: [CountryCoordinates] = [rennes, paris, nantes, bordeaux, lyon]
 
@@ -33,7 +32,7 @@ let globalWaitMessage: [String] = [
 protocol WeatherDetailViewModelProtocol: AnyObject {
     
     var currentStatus: ViewStatus { get }
-    var dataSource: [WeatherInfo] { get }
+    var dataSource: [WeatherViewModel] { get }
     var progress: Float { get }
     
     func reset()
@@ -46,7 +45,7 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
     var currentStatus: ViewStatus
     
     @Published
-    var dataSource: [WeatherInfo] = []
+    var dataSource: [WeatherViewModel] = []
     
     @Published
     var progress: Float = 0.0
@@ -56,6 +55,7 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
     
     private var index: Int = globalCountriesToRequest.count - 1
     private var timer: AnyCancellable?
+    private var requestTimer: AnyCancellable?
     private var labelTimer: AnyCancellable?
     private var cancellable = Set<AnyCancellable>()
     
@@ -69,29 +69,40 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
     
     func reset() {
         currentStatus = .idle
-        index = globalCountriesToRequest.count
+        index = globalCountriesToRequest.count - 1
         timer?.cancel()
+        requestTimer?.cancel()
         labelTimer?.cancel()
-        timer = nil
+        progress = 0
     }
     
+    @MainActor
     func startFetchJob() {
         currentStatus = .loading
+        dataSource = []
+        
         timer?.cancel()
+        requestTimer?.cancel()
+        labelTimer?.cancel()
+        
         timer = Timer.publish(every: 1, on: .main, in: .default)
             .autoconnect()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                let currentProgress = self.progress * 10
-                self.progress = min(1, self.progress + 0.01)
+                self.progress = min(1, self.progress + 0.02)
+            }
+        
+        requestTimer = Timer.publish(every: 10, on: .main, in: .default)
+            .autoconnect()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self = self else { return }
                 
-                if currentProgress.truncatingRemainder(dividingBy: 10) == 0 {
-                    self.performRequest(with: self.countriesToRequest[self.index])
-                    self.index -= 1
-                }
+                self.performRequest(with: self.countriesToRequest[self.index])
+                self.index -= 1
                 
-                if self.index == 0 {
+                if self.index < 0 {
                     self.reset()
                 }
             }
@@ -105,12 +116,13 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
     }
     
     func performRequest(with country: CountryCoordinates) {
-        Task {
+        Task { @MainActor in
             do {
                 let weatherInfo = try await weatherStore.getWeatherInfo(for: country)
-                dataSource.append(weatherInfo)
+                    self.dataSource.append(WeatherViewModel(countryName: country.name, weatherInfo: weatherInfo))
             } catch let error {
                 currentStatus = .error(error.localizedDescription)
+                reset()
             }
         }
     }

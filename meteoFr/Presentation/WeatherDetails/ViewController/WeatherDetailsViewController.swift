@@ -68,10 +68,12 @@ class WeatherDetailViewController: UIViewController {
         var configuration = UIButton.Configuration.filled()
         configuration.buttonSize = .large
         configuration.cornerStyle = .medium
-        configuration.title = "Refresh"
+        configuration.title = "Recommencer"
         let button: UIButton = .init(configuration: configuration)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+        button.addAction(UIAction { _ in
+            self.viewModel.startFetchJob()
+        }, for: .touchUpInside)
         return button
     }()
     
@@ -130,6 +132,13 @@ class WeatherDetailViewController: UIViewController {
                 self?.progressLabel.text = message
             }
             .store(in: &cancellables)
+        
+        viewModel.$dataSource
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }
+            .store(in: &cancellables)
     }
     
     private func setupMode(status: ViewStatus) {
@@ -137,23 +146,19 @@ class WeatherDetailViewController: UIViewController {
         case .loading:
             setupLoadingMode()
         case .idle:
-            // dont do anythign
             setupIdleMode()
         case .error(let message):
             // show error
             let alert = UIAlertController(title: "Error", message: "Error \(message)", preferredStyle: .alert)
             self.present(alert, animated: true)
             setupIdleMode()
-        case .loaded:
-            // clean UI
-            setupLoadingMode()
         }
     }
     
     private func setupIdleMode() {
+        tableView.isHidden = false
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
-        
         stateContainerView.subviews.forEach { subview in
             subview.removeFromSuperview()
         }
@@ -169,7 +174,7 @@ class WeatherDetailViewController: UIViewController {
     
     private func setupLoadingMode() {
         view.addSubview(activityIndicator)
-        
+        tableView.isHidden = true
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -198,16 +203,37 @@ extension WeatherDetailViewController: ViewConstraintAutoLayoutSetup {
     func setUpViews() {
         view.addSubview(tableView)
         view.addSubview(stateContainerView)
+        
+        // setup tableview
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(WeatherDetailsCell.self, forCellReuseIdentifier: WeatherDetailsCell.identifier)
     }
     
     func setUpConstraints() {
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: stateContainerView.topAnchor, trailing: view.trailingAnchor)
         
         stateContainerView.anchor(top: tableView.bottomAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, size: .init(width: 0, height: 100))
+    }
+}
+
+extension WeatherDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.dataSource.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: WeatherDetailsCell.identifier) as? WeatherDetailsCell else {
+            return UITableViewCell()
+        }
         
-        tableView.debugView()
+        cell.setup(with: viewModel.dataSource[indexPath.row])
         
-        stateContainerView.debugView()
-        
+        return cell
     }
 }

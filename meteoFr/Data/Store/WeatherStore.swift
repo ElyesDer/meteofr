@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias CountryCoordinates = (lat: Double, lon: Double)
+typealias CountryCoordinates = (name: String, lat: Double, lon: Double)
 
 protocol WeatherStoreProtocol {
     func getWeatherInfo(for country: CountryCoordinates) async throws -> WeatherInfo

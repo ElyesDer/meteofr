@@ -88,7 +88,7 @@ extension HomeViewController: ViewConstraintAutoLayoutSetup {
                             padding: .init(top: 0, left: 16, bottom: 16, right: 16))
         
         imageBody.anchor(top: nil, leading: contentView.leadingAnchor, bottom: actionButton.topAnchor, trailing: contentView.trailingAnchor,
-                         padding: .init(top: 0, left: 16, bottom: 45, right: 16),
+                         padding: .init(top: 0, left: 16, bottom: 100, right: 16),
                          size: .init(width: 0, height: 0))
         
         textLabel.anchor(top: imageBody.bottomAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor,

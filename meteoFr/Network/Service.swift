@@ -27,7 +27,7 @@ public enum APIProvider {
     var rawValue: String {
         switch self {
         case .latlong(let lat, let lon):
-            return baseUrl + "?lat=\(lat)&lon=\(lon)&appid=\(APIProvider.token)"
+            return baseUrl + "?lat=\(lat)&lon=\(lon)&appid=\(APIProvider.token)&units=metric"
         }
     }
 }
