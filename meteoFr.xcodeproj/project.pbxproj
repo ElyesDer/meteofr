@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		4347DCB02945FC86007BC93D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCAF2945FC86007BC93D /* AppDelegate.swift */; };
 		4347DCB22945FC86007BC93D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCB12945FC86007BC93D /* SceneDelegate.swift */; };
-		4347DCB42945FC86007BC93D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCB32945FC86007BC93D /* ViewController.swift */; };
-		4347DCB72945FC86007BC93D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4347DCB52945FC86007BC93D /* Main.storyboard */; };
+		4347DCB42945FC86007BC93D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCB32945FC86007BC93D /* HomeViewController.swift */; };
 		4347DCB92945FC87007BC93D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4347DCB82945FC87007BC93D /* Assets.xcassets */; };
 		4347DCBC2945FC87007BC93D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4347DCBA2945FC87007BC93D /* LaunchScreen.storyboard */; };
 		4347DCC72945FC88007BC93D /* meteoFrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCC62945FC88007BC93D /* meteoFrTests.swift */; };
 		4347DCD12945FC88007BC93D /* meteoFrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCD02945FC88007BC93D /* meteoFrUITests.swift */; };
 		4347DCD32945FC88007BC93D /* meteoFrUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4347DCD22945FC88007BC93D /* meteoFrUITestsLaunchTests.swift */; };
+		4347DCE12945FDAB007BC93D /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 4347DCE02945FDAB007BC93D /* Inject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +39,7 @@
 		4347DCAC2945FC86007BC93D /* meteoFr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = meteoFr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4347DCAF2945FC86007BC93D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4347DCB12945FC86007BC93D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4347DCB32945FC86007BC93D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4347DCB62945FC86007BC93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4347DCB32945FC86007BC93D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4347DCB82945FC87007BC93D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4347DCBB2945FC87007BC93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4347DCBD2945FC87007BC93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4347DCE12945FDAB007BC93D /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +101,7 @@
 			children = (
 				4347DCAF2945FC86007BC93D /* AppDelegate.swift */,
 				4347DCB12945FC86007BC93D /* SceneDelegate.swift */,
-				4347DCB32945FC86007BC93D /* ViewController.swift */,
-				4347DCB52945FC86007BC93D /* Main.storyboard */,
+				4347DCB32945FC86007BC93D /* HomeViewController.swift */,
 				4347DCB82945FC87007BC93D /* Assets.xcassets */,
 				4347DCBA2945FC87007BC93D /* LaunchScreen.storyboard */,
 				4347DCBD2945FC87007BC93D /* Info.plist */,
@@ -143,6 +142,9 @@
 			dependencies = (
 			);
 			name = meteoFr;
+			packageProductDependencies = (
+				4347DCE02945FDAB007BC93D /* Inject */,
+			);
 			productName = meteoFr;
 			productReference = 4347DCAC2945FC86007BC93D /* meteoFr.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +217,9 @@
 				Base,
 			);
 			mainGroup = 4347DCA32945FC86007BC93D;
+			packageReferences = (
+				4347DCDF2945FDAB007BC93D /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			productRefGroup = 4347DCAD2945FC86007BC93D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,7 +238,6 @@
 			files = (
 				4347DCBC2945FC87007BC93D /* LaunchScreen.storyboard in Resources */,
 				4347DCB92945FC87007BC93D /* Assets.xcassets in Resources */,
-				4347DCB72945FC86007BC93D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4347DCB42945FC86007BC93D /* ViewController.swift in Sources */,
+				4347DCB42945FC86007BC93D /* HomeViewController.swift in Sources */,
 				4347DCB02945FC86007BC93D /* AppDelegate.swift in Sources */,
 				4347DCB22945FC86007BC93D /* SceneDelegate.swift in Sources */,
 			);
@@ -297,14 +301,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4347DCB52945FC86007BC93D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4347DCB62945FC86007BC93D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4347DCBA2945FC87007BC93D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -440,9 +436,9 @@
 				DEVELOPMENT_TEAM = 4679JBN3A9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = meteoFr/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Meteo FR";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -468,9 +464,9 @@
 				DEVELOPMENT_TEAM = 4679JBN3A9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = meteoFr/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Meteo FR";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,6 +598,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4347DCDF2945FDAB007BC93D /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4347DCE02945FDAB007BC93D /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4347DCDF2945FDAB007BC93D /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4347DCA42945FC86007BC93D /* Project object */;
 }
