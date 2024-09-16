@@ -13,7 +13,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        destination: ['platform=macOS']
+        destination: ['platform:iOS, id:dvtdevice-DVTiPhonePlaceholder-iphoneos:placeholder, name:Any iOS Device']
     steps:
     - uses: actions/checkout@v1
     - name: Run unit tests
