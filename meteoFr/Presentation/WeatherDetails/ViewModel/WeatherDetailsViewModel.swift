@@ -93,7 +93,7 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
                 self.progress = min(1, self.progress + 0.02)
             }
         
-        requestTimer = Timer.publish(every: 10, on: .main, in: .default)
+        requestTimer = Timer.publish(every: 1, on: .main, in: .default)
             .autoconnect()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -117,13 +117,13 @@ class WeatherDetailsViewModel: WeatherDetailViewModelProtocol {
     
     func performRequest(with country: CountryCoordinates) {
         Task { @MainActor in
-            do {
-                let weatherInfo = try await weatherStore.getWeatherInfo(for: country)
-                    self.dataSource.append(WeatherViewModel(countryName: country.name, weatherInfo: weatherInfo))
-            } catch let error {
-                currentStatus = .error(error.localizedDescription)
-                reset()
-            }
+//            do {
+//                let weatherInfo = try await weatherStore.getWeatherInfo(for: country)
+            self.dataSource.append(WeatherViewModel(countryName: country.name, weatherInfo: .init(coord: .init(lon: 20, lat: 20), weather: [], base: nil, main: nil, visibility: 10, wind: nil, rain: nil, clouds: nil, dt: 12, sys: nil, timezone: nil, id: Int.random(in: 0...10), name: country.name, cod: nil)))
+//            } catch let error {
+//                currentStatus = .error(error.localizedDescription)
+//                reset()
+//            }
         }
     }
 }

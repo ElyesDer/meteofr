@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class WeatherDetailsCell: UITableViewCell {
     
@@ -35,10 +36,36 @@ class WeatherDetailsCell: UITableViewCell {
     
     func setup(with content: WeatherViewModel) {
         self.content = content
+
+        print("setup: called with \(content.countryName)")
         
         // setup image loading
-        setUpViews()
-        setUpConstraints()
+//        setUpViews()
+//        setUpConstraints()
+
+        contentConfiguration = UIHostingConfiguration {
+//            HelloView()
+            Text(content.countryName)
+                .border(Color.red, width: 2)
+        }
+    }
+}
+
+struct HelloView: View {
+    @State private var toggle: Bool = false
+
+    public init() {
+    }
+
+    var body: some View {
+        VStack {
+            Text("Tap me for more")
+                .onTapGesture {
+                    toggle.toggle()
+                }
+        }
+//        .frame(height: toggle ? 100 : 200)
+        .border(Color.red, width: 1)
     }
 }
 

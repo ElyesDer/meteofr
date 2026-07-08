@@ -12,9 +12,17 @@ struct WeatherViewModel {
     var countryName: String
     var temperature: String
     var clounds: UIImage
+
+    let animals: [String] = [
+        "Ten horses:  horse horse horse horse horse horse horse horse horse horse ",
+        "Three cows:  cow, cow, cow",
+        "One camel:  camel",
+        "Ninety-nine sheep:  sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep baaaa sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep sheep",
+        "Thirty goats:  goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat goat "]
+
     
     init(countryName: String, weatherInfo: WeatherInfo) {
-        self.countryName = countryName
+        self.countryName = animals.randomElement()! // countryName
         self.temperature = "\(Int(weatherInfo.main?.temp ?? 0.0))C°"
         switch weatherInfo.clouds?.all ?? 0 {
         case 0:

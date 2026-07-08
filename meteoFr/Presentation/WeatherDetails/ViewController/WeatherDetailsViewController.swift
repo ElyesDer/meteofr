@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 import Combine
 
 class WeatherDetailViewController: UIViewController {
@@ -207,6 +208,11 @@ extension WeatherDetailViewController: ViewConstraintAutoLayoutSetup {
         // setup tableview
         tableView.delegate = self
         tableView.dataSource = self
+
+        // Along with auto layout, these are the keys for enabling variable cell height
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableView.automaticDimension
+
         tableView.register(WeatherDetailsCell.self, forCellReuseIdentifier: WeatherDetailsCell.identifier)
     }
     
